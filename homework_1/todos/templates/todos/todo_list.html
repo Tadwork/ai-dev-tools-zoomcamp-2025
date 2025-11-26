@@ -1,0 +1,31 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Todo List</h1>
+<a href="{% url 'todo_create' %}" class="btn btn-primary mb-3">Add New Todo</a>
+<div class="list-group">
+    {% for todo in todos %}
+    <div
+        class="list-group-item d-flex justify-content-between align-items-center {% if todo.is_resolved %}list-group-item-success{% endif %}">
+        <div>
+            <h5 class="mb-1 {% if todo.is_resolved %}text-decoration-line-through{% endif %}">{{ todo.title }}</h5>
+            <p class="mb-1">{{ todo.description }}</p>
+            <small>Due: {{ todo.due_date|default:"No due date" }}</small>
+        </div>
+        <div>
+            <form action="{% url 'todo_resolve' todo.pk %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit"
+                    class="btn btn-sm {% if todo.is_resolved %}btn-warning{% else %}btn-success{% endif %}">
+                    {% if todo.is_resolved %}Unresolve{% else %}Resolve{% endif %}
+                </button>
+            </form>
+            <a href="{% url 'todo_update' todo.pk %}" class="btn btn-sm btn-info">Edit</a>
+            <a href="{% url 'todo_delete' todo.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No todos found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
