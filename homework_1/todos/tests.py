@@ -19,6 +19,18 @@ class TodoTests(TestCase):
         })
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Todo.objects.count(), 2)
+        new_todo = Todo.objects.last()
+        self.assertEqual(new_todo.title, 'New Todo')
+
+    def test_todo_create_with_date(self):
+        response = self.client.post(reverse('todo_create'), {
+            'title': 'Dated Todo',
+            'description': 'Description',
+            'due_date': '2023-12-31'
+        })
+        self.assertEqual(response.status_code, 302)
+        todo = Todo.objects.get(title='Dated Todo')
+        self.assertEqual(str(todo.due_date), '2023-12-31')
 
     def test_todo_update(self):
         response = self.client.post(reverse('todo_update', args=[self.todo.pk]), {

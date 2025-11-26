@@ -14,8 +14,7 @@
     </div>
     <div class="mb-3">
         <label for="due_date" class="form-label">Due Date</label>
-        <input type="datetime-local" class="form-control" id="due_date" name="due_date"
-            value="{{ todo.due_date|date:'Y-m-d\TH:i' }}">
+        <input type="date" class="form-control" id="due_date" name="due_date" value="{{ todo.due_date|date:'Y-m-d' }}">
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
     <a href="{% url 'todo_list' %}" class="btn btn-secondary">Cancel</a>
