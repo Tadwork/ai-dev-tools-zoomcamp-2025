@@ -4,6 +4,8 @@ This project is a simple TODO application built with Django.
 
 It was created for the [AI Dev Tools Zoomcamp Homework 1](https://github.com/DataTalksClub/ai-dev-tools-zoomcamp/blob/main/cohorts/2025/01-overview/homework.md).
 
+![Todo List Screenshot](todo_list.png)
+
 ## Features
 
 - Create, edit, and delete TODOs
